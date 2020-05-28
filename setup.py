@@ -47,11 +47,6 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy'
-        'Topic :: Security',
-        'Topic :: Internet',
-        'Topic :: Internet :: WWW/HTTP',
-        'Topic :: Software Development :: Testing',
-        'Topic :: Software Development :: Libraries :: Python Modules'
     ],
     extras_require={
         'security': ['pyOpenSSL >= 0.14', 'cryptography>=1.3.4'],
