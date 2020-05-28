@@ -24,7 +24,7 @@ setup(
     long_description_content_type='text/markdown',
     author=about['__author__'],
     author_email=about['__author_email__'],
-    packages=find_packages(exclude=['tests']),
+    packages=find_packages(exclude=['examples', 'tests']),
     python_requires=">2.7.*, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*",
     install_requires=install_requires,
     license=about['__license__'],
