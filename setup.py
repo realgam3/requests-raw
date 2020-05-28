@@ -5,9 +5,8 @@ from setuptools import setup, find_packages
 
 __folder__ = path.abspath(path.dirname(__file__))
 
-with open(path.join(__folder__, 'README.md')) as ld_file:
-    long_description = ld_file.read()
-    ld_file.flush()
+with open(path.join(__folder__, 'README.md')) as readme_file:
+    long_description = readme_file.read()
 
 about = {}
 with open(path.join(__folder__, 'requests_raw', '__version__.py')) as about_file:

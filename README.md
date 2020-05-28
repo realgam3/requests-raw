@@ -1,5 +1,19 @@
 # requests-raw
+[![PyPI version](https://badge.fury.io/py/requests-raw.svg)](https://badge.fury.io/py/requests-raw)  
+
 Use requests to send HTTP raw sockets (To Test RFC Compliance)
+
+## Installation
+
+### Prerequisites
+
+* Python 3.5+
+  
+### From pip
+
+```sh
+pip3 install requests-raw
+```
 
 ## Usage
 ```python
