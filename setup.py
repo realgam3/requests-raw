@@ -24,7 +24,7 @@ setup(
     author=about['__author__'],
     author_email=about['__author_email__'],
     packages=find_packages(exclude=['examples', 'tests']),
-    python_requires=">2.7.*, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*",
+    python_requires=">=2.7.*, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*",
     install_requires=install_requires,
     license=about['__license__'],
     platforms='any',
@@ -32,7 +32,7 @@ setup(
     zip_safe=False,
     classifiers=[
         'License :: OSI Approved :: Apache Software License',
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
         'Natural Language :: English',
@@ -40,6 +40,8 @@ setup(
         'Operating System :: MacOS :: MacOS X',
         'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
@@ -51,6 +53,7 @@ setup(
     extras_require={
         'security': ['pyOpenSSL >= 0.14', 'cryptography>=1.3.4'],
         'socks': ['PySocks>=1.5.6, !=1.5.7'],
+        'socks:sys_platform == "win32" and python_version == "2.7"': ['win_inet_pton'],
     },
     project_urls={
         'Source': 'https://github.com/realgam3/requests-raw',
