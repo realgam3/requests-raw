@@ -1,7 +1,11 @@
-from http import client
 from .__version__ import __title__
 from requests.utils import urlparse
 from urllib3.connection import HTTPConnection, HTTPSConnection
+
+try:
+    from http import client
+except ImportError:
+    import httplib as client
 
 
 class RawHTTPConnection(HTTPConnection):
@@ -10,12 +14,11 @@ class RawHTTPConnection(HTTPConnection):
         self.__url = None
         self.__method = None
 
-    def putrequest(self, method, url, skip_host=False, skip_accept_encoding=False):
+    def putrequest(self, method, url, *args, **kwargs):
         self.__method = method.lower()
         if self.__method != __title__:
             return super(RawHTTPConnection, self).putrequest(
-                method, url, skip_host=skip_host,
-                skip_accept_encoding=skip_accept_encoding
+                method, url, *args, **kwargs
             )
 
         self.__url = urlparse(url)
@@ -34,9 +37,9 @@ class RawHTTPConnection(HTTPConnection):
         if self._HTTPConnection__state != client._CS_REQ_STARTED:
             raise client.CannotSendHeader()
 
-    def endheaders(self, message_body=None, *, encode_chunked=False):
+    def endheaders(self, message_body=None, **kwargs):
         if self.__method != __title__:
-            return super(RawHTTPConnection, self).endheaders(message_body=message_body, encode_chunked=encode_chunked)
+            return super(RawHTTPConnection, self).endheaders(message_body=message_body, **kwargs)
 
         buffer = message_body
         # HTTP Proxy
@@ -55,12 +58,11 @@ class RawHTTPSConnection(HTTPSConnection):
     def __init__(self, *args, **kwargs):
         super(RawHTTPSConnection, self).__init__(*args, **kwargs)
 
-    def putrequest(self, method, url, skip_host=False, skip_accept_encoding=False):
+    def putrequest(self, method, url, *args, **kwargs):
         self.__method = method.lower()
         if self.__method != __title__:
             return super(RawHTTPSConnection, self).putrequest(
-                method, url, skip_host=skip_host,
-                skip_accept_encoding=skip_accept_encoding
+                method, url, *args, **kwargs
             )
 
         if self._HTTPConnection__response and self._HTTPConnection__response.isclosed():
@@ -78,9 +80,9 @@ class RawHTTPSConnection(HTTPSConnection):
         if self._HTTPConnection__state != client._CS_REQ_STARTED:
             raise client.CannotSendHeader()
 
-    def endheaders(self, message_body=None, *, encode_chunked=False):
+    def endheaders(self, message_body=None, **kwargs):
         if self.__method != __title__:
-            return super(RawHTTPSConnection, self).endheaders(message_body=message_body, encode_chunked=encode_chunked)
+            return super(RawHTTPSConnection, self).endheaders(message_body=message_body, **kwargs)
 
         if self._HTTPConnection__state == client._CS_REQ_STARTED:
             self._HTTPConnection__state = client._CS_REQ_SENT

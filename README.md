@@ -1,5 +1,5 @@
 # requests-raw
-[![PyPI version](https://badge.fury.io/py/requests-raw.svg)](https://badge.fury.io/py/requests-raw)
+[![PyPI version](https://img.shields.io/pypi/v/requests-raw)](https://pypi.org/project/requests-raw/)
 [![Downloads](https://pepy.tech/badge/requests-raw)](https://pepy.tech/project/requests-raw)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/requests-raw)  
 
