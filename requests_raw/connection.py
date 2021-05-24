@@ -45,7 +45,10 @@ class RawHTTPConnection(HTTPConnection):
         # HTTP Proxy
         if self.__url.scheme and self.__url.netloc:
             _buffer = buffer.split(b"/", 1)
-            _buffer.insert(1, "{url.scheme}://{url.netloc}/".format(url=self.__url).encode())
+            if _buffer[0].endswith(b" "):
+                _buffer.insert(1, "{url.scheme}://{url.netloc}/".format(url=self.__url).encode())
+            else:
+                _buffer.insert(1, b"/")
             buffer = b"".join(_buffer)
         if self._HTTPConnection__state == client._CS_REQ_STARTED:
             self._HTTPConnection__state = client._CS_REQ_SENT
