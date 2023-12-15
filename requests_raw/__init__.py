@@ -1,3 +1,4 @@
+import urllib3
 import requests
 import email.parser
 from requests import *
@@ -16,15 +17,9 @@ _begin = HTTPResponse.begin
 
 
 # Fixes Bug https://github.com/realgam3/requests-raw/issues/1
-def __is_response_to_head(response):
-    method = response._method or __title__
-    if isinstance(method, int):
-        return method == 3
-    return method.upper() == "HEAD"
-
-
 # Added Feature https://github.com/realgam3/requests-raw/issues/5
 def begin(self):
+    self._method = self._method or __title__
     if self.headers is not None:
         # we've already started reading the response
         return
@@ -57,13 +52,7 @@ def monkey_patch_all():
     setattr(requests.api, "raw", raw)
     setattr(requests.sessions.Session, "raw", Session.raw)
     setattr(requests.sessions.Session, "request", __request)
-    setattr(requests.packages.urllib3.response, "is_response_to_head", __is_response_to_head)
     setattr(HTTPResponse, "begin", begin)
-    try:
-        from .socks import RawSOCKSProxyManager
-        setattr(requests.adapters, "SOCKSProxyManager", RawSOCKSProxyManager)
-    except ImportError:
-        pass
 
     return True
 

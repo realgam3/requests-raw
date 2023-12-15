@@ -8,5 +8,5 @@ def request(method, url, **kwargs):
 
 
 def raw(url, data, **kwargs):
-    kwargs.setdefault('allow_redirects', True)
+    kwargs.setdefault('allow_redirects', False)
     return request(__title__, url, data=data, **kwargs)

@@ -10,7 +10,8 @@ class Session(requests.Session):
         self.mount("https://", RawAdapter())
 
     def raw(self, url, data, **kwargs):
-        kwargs.setdefault('allow_redirects', True)
+        # Fix https://github.com/realgam3/requests-raw/issues/4
+        kwargs.setdefault('allow_redirects', False)
         return self.request(__title__, url, data=data, **kwargs)
 
 

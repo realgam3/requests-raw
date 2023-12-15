@@ -1,13 +1,12 @@
 import typing
 from http import client
 from .__version__ import __title__
-from urllib.parse import urlparse
+from urllib3.util.url import parse_url
 from urllib3.connection import HTTPConnection, HTTPSConnection, _TYPE_BODY
 
 
 class RawHTTPConnection(HTTPConnection):
     def __init__(self, *args, **kwargs):
-        _socks_options = kwargs.pop("_socks_options", None)
         super().__init__(*args, **kwargs)
         self.__method = None
 
@@ -26,7 +25,7 @@ class RawHTTPConnection(HTTPConnection):
         self.__method = method.lower()
         if self.__method == __title__:
             # HTTP Proxy
-            _url = urlparse(url)
+            _url = parse_url(url)
             if _url.scheme and _url.netloc:
                 _body = body.split(b"/", 1)
                 if _body[0].endswith(b" "):
