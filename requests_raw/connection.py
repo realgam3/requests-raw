@@ -7,6 +7,7 @@ from urllib3.connection import HTTPConnection, HTTPSConnection, _TYPE_BODY
 
 class RawHTTPConnection(HTTPConnection):
     def __init__(self, *args, **kwargs):
+        _socks_options = kwargs.pop("_socks_options", None)
         super().__init__(*args, **kwargs)
         self.__method = None
 
