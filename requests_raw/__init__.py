@@ -31,11 +31,11 @@ def begin(self):
 
     line = self.fp.peek()
     if not line.startswith(b"HTTP/"):
-        self.version = 0
         self.code = self.status = 0
-        self.reason = 0, "Non Standard"
+        self.reason = "Non Standard"
+        self.version = 0
         self.headers = self.msg = email.parser.Parser(_class=HTTPMessage).parsestr("")
-        self.length = len(line)
+        self.length = None
         self.chunked = False
         self.will_close = True
         return
