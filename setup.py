@@ -28,7 +28,7 @@ setup(
     install_requires=install_requires,
     license=about['__license__'],
     platforms='any',
-    url='https://github.com/realgam3/requests-raw',
+    url=about["__url__"],
     zip_safe=False,
     classifiers=[
         'Environment :: Web Environment'
@@ -58,6 +58,6 @@ setup(
         "use_chardet_on_py3": ["chardet>=3.0.2,<6"],
     },
     project_urls={
-        'Source': 'https://github.com/realgam3/requests-raw',
+        'Source': about["__url__"],
     },
 )

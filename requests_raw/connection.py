@@ -1,11 +1,40 @@
 import typing
+import email.parser
 from http import client
-from .__version__ import __title__
+
 from urllib3.util.url import parse_url
 from urllib3.connection import HTTPConnection, HTTPSConnection, _TYPE_BODY
 
+from .__version__ import __title__
+
+
+class RawHTTPResponse(client.HTTPResponse):
+    # Fixes Bug https://github.com/realgam3/requests-raw/issues/1
+    # Added Feature https://github.com/realgam3/requests-raw/issues/5
+    def begin(self):
+        self._method = self._method or __title__
+
+        if self.headers is not None:
+            # we've already started reading the response
+            return
+
+        line = self.fp.peek()
+        if not line.startswith(b"HTTP/"):
+            self.code = self.status = 0
+            self.reason = "Non Standard"
+            self.version = 0
+            self.headers = self.msg = email.parser.Parser(_class=client.HTTPMessage).parsestr("")
+            self.length = None
+            self.chunked = False
+            self.will_close = True
+            return
+
+        return super().begin()
+
 
 class RawHTTPConnection(HTTPConnection):
+    response_class = RawHTTPResponse
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.__method = None
