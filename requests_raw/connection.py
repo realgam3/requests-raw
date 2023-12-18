@@ -9,10 +9,10 @@ from .__version__ import __title__
 
 
 class RawHTTPResponse(client.HTTPResponse):
-    # Fixes Bug https://github.com/realgam3/requests-raw/issues/1
     # Added Feature https://github.com/realgam3/requests-raw/issues/5
     def begin(self):
-        self._method = self._method or __title__
+        # Fixes Bug https://github.com/realgam3/requests-raw/issues/1
+        self._method = self._method or __title__.upper()
 
         if self.headers is not None:
             # we've already started reading the response
