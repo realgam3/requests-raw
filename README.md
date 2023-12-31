@@ -5,7 +5,7 @@
 
 Use [requests](https://requests.readthedocs.io/) to send HTTP raw sockets (To Test RFC Compliance)
 
-![Logo](https://raw.githubusercontent.com/realgam3/requests-raw/v2.0.0/ext/requests-raw-logo.png)
+![Logo](https://raw.githubusercontent.com/realgam3/requests-raw/v2.0.0/assets/img/requests-raw-logo.png)
 
 ## Usage
 ```python
