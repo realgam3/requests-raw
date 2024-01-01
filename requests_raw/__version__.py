@@ -1,5 +1,5 @@
 __title__ = 'requests-raw'
-__description__ = 'Use requests to talk HTTP via a Raw sockets (To Test RFC Compliance)'
+__description__ = 'HTTP communication through raw sockets using requests for RFC compliance testing'
 __url__ = 'https://github.com/realgam3/requests-raw'
 __version__ = '2.0.0'
 __build__ = 0x020000

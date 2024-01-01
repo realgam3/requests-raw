@@ -52,16 +52,11 @@ class RawHTTPConnection(HTTPConnection):
             enforce_content_length: bool = True,
     ) -> None:
         self.__method = method.lower()
-        if self.__method == __title__:
-            # HTTP Proxy
+        # HTTP Proxy
+        if self.__method == __title__ and not url.startswith("/"):
             _url = parse_url(url)
-            if _url.scheme and _url.netloc:
-                _body = body.split(b"/", 1)
-                if _body[0].endswith(b" "):
-                    _body.insert(1, "{url.scheme}://{url.netloc}/".format(url=_url).encode())
-                else:
-                    _body.insert(1, b"/")
-                body = b"".join(_body)
+            _body = body.split(b"/", 1)
+            body = b"".join([_body[0], f"{_url.scheme}://{_url.netloc}/".encode(), _body[1]])
 
         return super().request(
             method, url, body, headers,
