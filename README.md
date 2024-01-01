@@ -12,8 +12,8 @@ Use [requests](https://requests.readthedocs.io/) to send HTTP raw sockets (To Te
 import json
 import requests_raw
 
-
-res = requests_raw.raw(url='http://httpbin.org/', data=b"GET /get HTTP/1.1\r\nHost: httpbin.org\r\n\r\n")
+req = b"GET /get HTTP/1.1\r\nHost: httpbin.org\r\n\r\n"
+res = requests_raw.raw(url='http://httpbin.org/', data=req)
 res_json = res.json()
 print(json.dumps(res_json, indent=2))
 ```
