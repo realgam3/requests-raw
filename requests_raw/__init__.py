@@ -27,7 +27,3 @@ def monkey_patch_all():
     setattr(requests.sessions.Session, "raw", Session.raw)
     setattr(requests.sessions.Session, "request", __request)
     return True
-
-
-# Monkey Patch Automatically
-monkey_patch_all()
