@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import typing
 import email.parser
 from http import client
