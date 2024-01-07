@@ -24,7 +24,7 @@ setup(
     author=about['__author__'],
     author_email=about['__author_email__'],
     packages=find_packages(exclude=['examples', 'tests']),
-    python_requires=">=3.8",
+    python_requires=">=3.7",
     install_requires=install_requires,
     license=about['__license__'],
     platforms='any',
