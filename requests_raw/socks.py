@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 try:
     import socks  # type: ignore[import]
 except ImportError:
@@ -22,13 +24,19 @@ from .connection import RawHTTPConnection, RawHTTPSConnection
 from .connectionpool import RawHTTPConnectionPool, RawHTTPSConnectionPool
 
 
-class _TYPE_SOCKS_OPTIONS(typing.TypedDict):
-    socks_version: int
-    proxy_host: str | None
-    proxy_port: str | None
-    username: str | None
-    password: str | None
-    rdns: bool
+try:
+    from typing import TypedDict
+
+    class _TYPE_SOCKS_OPTIONS(TypedDict):
+        socks_version: int
+        proxy_host: str | None
+        proxy_port: str | None
+        username: str | None
+        password: str | None
+        rdns: bool
+
+except ImportError:  # Python 3.7
+    _TYPE_SOCKS_OPTIONS = typing.Dict[str, typing.Any]  # type: ignore[misc, assignment]
 
 
 class RawSOCKSConnection(SOCKSConnection, RawHTTPConnection):
